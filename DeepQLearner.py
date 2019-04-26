@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Created on Wed Apr  3 14:52:12 2019
 
@@ -12,7 +12,7 @@ Created on Thu Mar 28 09:43:58 2019
 @author: Usuario
 """
 import torch, gym , random
-from datetime import datetime
+from datetime import datetime 
 import numpy as np
 
 from argparse import ArgumentParser
@@ -304,14 +304,14 @@ if __name__ == "__main__":
                     agent.save(env_conf['env_name'])
                     num_improved_episodes_before_checkpoint = 0
                 
-                print("\n Episodio #{}, finalizado con {} iteraciones. Con {} estados: recompensa = {}, recompensa media = {:.2f}, mejor recompensa = {}".
-                      format(episode, step + 1, reward_type, total_reward, np.mean(episode_rewards), agent.best_reward))
-                
+                print("\n Episodio #{}, finalizado con {} iteraciones. Con {} estados: recompensa = {}, recompensa media = {:.2f}, mejor recompensa = {}, current global step = {}".
+                      format(episode, step + 1, reward_type, total_reward, np.mean(episode_rewards), agent.best_reward, global_step_num))
+                print(global_step_num)
                 writer.add_scalar("main/ep_reward", total_reward, global_step_num)
                 writer.add_scalar("main/mean_ep_reward", np.mean(episode_rewards), global_step_num)
                 writer.add_scalar("main/max_ep_reward", agent.best_reward, global_step_num)
                 
-                if agent.memory.get_size() >= 2 * agent_params['replay_start_size'] and not args.test:
+                if agent.memory.get_size() >= 200 * agent_params['replay_start_size'] and not args.test:
                     agent.replay_experience()
                 
                 break

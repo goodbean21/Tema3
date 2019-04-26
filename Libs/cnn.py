@@ -18,7 +18,7 @@ class CNN(torch.nn.Module):
         :param device       : Donde la red neuronal se debe almacenar en cada iteración 
         """
         # input_shape CX84X84
-        super(cnn, self).__init__()
+        super(CNN, self).__init__()
         self.device = device
         self.layer1 = torch.nn.Sequential(
                 torch.nn.Conv2d(input_shape[0], 64, kernel_size = 4, stride = 2, padding = 1),
